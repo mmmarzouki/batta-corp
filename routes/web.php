@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware(['author'])->group(function() {
+
+    
+});
+
+Route::get('/unautherized','FailController@unautherized')->name('unautherized');
+Route::get('/notfound','FailController@not_found')->name('not_found');

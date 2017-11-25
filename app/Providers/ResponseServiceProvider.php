@@ -43,7 +43,11 @@ class ResponseServiceProvider extends ServiceProvider
         
         \Response::macro('internal_server_error',function($message = 'Oops, An Error Occured', $data = null) {
             return response()->api(500,$message,$data);           
-        });         
+        });
+
+        \Response::macro('not_found_exception',function($message = 'Page Not Found', $data = null) {
+            return response()->api(404,$message,$data);           
+        });   
     }
 
     /**

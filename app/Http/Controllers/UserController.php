@@ -59,6 +59,12 @@ class UserController extends Controller
             'weight' => 'numeric'
         ]);
 
+        $access_token = $request->header('Authorization');
+
+        if( ! $access_token ) {
+            return response()->unautherized();
+        }
+
         $id = $request_parsed['id'];
 
         $user = User::find($id);
