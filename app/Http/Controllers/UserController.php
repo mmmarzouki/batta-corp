@@ -10,6 +10,7 @@ class UserController extends Controller
 {
     public function create(Request $request) {
 
+        $request_parsed = $request->json()->all();
         
         $validator = \Validator::make($request,[
             'name' => 'required|alpha',
@@ -21,11 +22,15 @@ class UserController extends Controller
             'weight' => 'required|numeric'
         ]);
 
+        if( $validatior->fails() ) {
+            return response()->bad_request_exception();
+        }
+
         $user = new User();
         
-        foreach( $request->all() as $key => $value ) {
+        foreach( $request_parsed as $key => $value ) {
 
-            if( in_array($key,$user->getColumn()) ) {
+            if( in_array($key,$user->getColumn()) && ! is_null($value) ) {
 
                 $user->$key = $value;
 
@@ -39,5 +44,69 @@ class UserController extends Controller
         $user->saveOrFail();
 
         return response()->created();
+    }
+
+    public function update(Request $request) {
+
+        $request_parsed = $request->json()->all();
+
+        $validator = \Validator::make($request_parsed,[
+            'name' => 'alpha',
+            'lastname' => 'alpha',
+            'password' => 'min:10|confirmed',
+            'age' => 'digits_between:13,200',
+            'height' => 'numeric',
+            'weight' => 'numeric'
+        ]);
+
+        $id = $request_parsed['id'];
+
+        $user = User::find($id);
+
+        if( is_null($user) ) {
+
+            return response()->internal_server_exception();
+        }
+
+        if( $validator->fails() ) {
+
+            return response()->bad_request_exception();
+        }
+
+        foreach( $request_parsed as $key => $value ) {
+
+            if( $value && in_array($key,$user->getColumns())) {
+
+                if( $key != 'id' && $key != 'email' && $key != 'id') {
+
+                    $user->$key = $value;
+                }
+            }
+        }
+
+        $user->saveOrFail();
+
+        return response()->update();
+    }
+
+    public function read(Request $request) {
+
+        $request_parsed = $request->json()->all();
+
+        $id = $request->get('id');
+
+        if( is_null($id) ) {
+            return $response->internal_server_error();
+        }
+
+        $user = User::find($id);
+
+        if( is_null($user) ) {
+            return $response->internal_server_error();
+        }
+
+        $user_data = $user->getAttributes();
+
+        return response()->api($data = $user_data);
     }
 }

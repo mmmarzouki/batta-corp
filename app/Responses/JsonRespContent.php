@@ -21,5 +21,5 @@ class JsonResponseContent implements Jsonable
 
     public function toJson($options = 0){
         return json_encode($this);
-    }    
+    }
 }
