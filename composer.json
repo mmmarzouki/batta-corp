@@ -8,20 +8,14 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0",
-		"infyomlabs/laravel-generator": "dev-master",
-		"laravelcollective/html": "5.2.*",
-		"infyomlabs/core-templates": "dev-master",
-		"doctrine/dbal": "~2.3",
-		"infyomlabs/swagger-generator": "dev-master",
-		"jlapp/swaggervel": "dev-master"
+        "laravel/tinker": "~1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~6.0"
-    },	 
+    },
     "autoload": {
         "classmap": [
             "database/seeds",
