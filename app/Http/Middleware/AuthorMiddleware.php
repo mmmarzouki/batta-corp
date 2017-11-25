@@ -23,6 +23,6 @@ class AuthorMiddleware
             return redirect()->route('unautherized');
         }
 
-        return $next($request);
+        return $next($request); 
     }
 }

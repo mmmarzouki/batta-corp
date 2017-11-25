@@ -9,7 +9,7 @@ class Event extends BaseModel
     public $table = 'events';
 
     public function user(){
-        return $this->belongsToMany('App\User',);
+        return $this->belongsToMany('App\User','events_users','id_event','id_user')->withPivot('succeed');
     }
 
     public function achievment(){

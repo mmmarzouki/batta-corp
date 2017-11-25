@@ -9,7 +9,7 @@ class Peer extends BaseModel
     public $table = 'peers';
 
     public function user(){
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User','peers_users','id_peer','id_user');
     }
     public function activity(){
         return $this->hasMany('App\Activity','id_peer');

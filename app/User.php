@@ -13,7 +13,7 @@ class User extends BaseModel
     }
 
     public function peer(){
-        return $this->belongsToMany('App\Peer');
+        return $this->belongsToMany('App\Peer','peers_users','id_user','id_peer');
     }
 
     public function message(){
