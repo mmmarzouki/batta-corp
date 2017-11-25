@@ -25,7 +25,19 @@ class UserController extends Controller
         
         foreach( $request->all() as $key => $value ) {
 
-            
+            if( in_array($key,$user->getColumn()) ) {
+
+                $user->$key = $value;
+
+                if( $key == 'password') {
+                    
+                    $user->$key = password_hash($value,CRYPT_SHA256);
+                }
+            }
         }
+
+        $user->saveOrFail();
+
+        return response()->created();
     }
 }
