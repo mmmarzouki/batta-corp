@@ -14,41 +14,61 @@ class ResponseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Response::macro('api',function($code = 200, $message = '', $data = null) {
-            $resp = \Response::make();
-            $content = new JsonResponseContent($_code = $code, $_message = $message, $_data = $data );
-            $resp->setContent($content);
-            $resp->setStatusCode($code=200,$message);
-            return $resp;            
+        \Response::macro('api',function($message = 'Status Ok', $data = null) {
+            $to_return = ['code' => 200];
+            return response()->json($to_return);           
         });
+
+        \Response::macro('ok',function($message = 'Status Ok', $data = null) {
+            $to_return = ['code' => 200];
+            return response()->json($to_return);           
+        });        
         
         \Response::macro('created',function($message = 'Ressource Created', $data = null) {
-                return response()->api(200,$message,$data);
+            
+            $to_return = ['code' => 200];
+            return response()->json($to_return);
         });
         
         \Response::macro('deleted',function($message = 'Ressource Deleted', $data = null) {
-            return response()->api(200,$message,$data);          
+            
+            $to_return = ['code' => 200];
+            return response()->json($to_return);          
         });
 
         \Response::macro('updated',function($message = 'Ressource Updated', $data = null) {
-            return response()->api(200,$message,$data);           
+            
+            $to_return = ['code' => 200];
+            return response()->json($to_return);
         });
 
          \Response::macro('bad_request_exception',function($message = 'You may have some data missing', $data = null) {
-            return response()->api(400,$message,$data);           
+            $to_return = ['code' => 400];
+            return response()->json($to_return);        
         });
         
         \Response::macro('unautherized_exception',function($message = 'Unautherized.', $data = null) {
-            return response()->api(401,$message,$data);           
+            $to_return = ['code' => 401];
+            return response()->json($to_return);          
         });
         
         \Response::macro('internal_server_error',function($message = 'Oops, An Error Occured', $data = null) {
-            return response()->api(500,$message,$data);           
+            
+            $to_return = ['code' => 500];
+            return response()->json($to_return);
         });
 
         \Response::macro('not_found_exception',function($message = 'Page Not Found', $data = null) {
-            return response()->api(404,$message,$data);           
-        });   
+            
+            $to_return = ['code' => 404];
+            return response()->json($to_return);
+        });
+        
+        \Response::macro('access_denied_exception',function($message = 'Page Not Found', $data = null) {
+            
+            $to_return = ['code' => 403];
+            return response()->json($to_return);
+        });         
     }
 
     /**
@@ -58,5 +78,6 @@ class ResponseServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
     }
 }

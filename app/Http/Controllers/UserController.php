@@ -60,7 +60,7 @@ class UserController extends Controller
             'height' => 'numeric',
             'weight' => 'numeric'
         ]);
-        
+
         $id = $request->get('id');
 
         $user = User::find($id);
