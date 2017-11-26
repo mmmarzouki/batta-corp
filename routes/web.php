@@ -22,4 +22,6 @@ Route::middleware(['author'])->group(function() {
 
 Route::get('/unautherized','FailController@unautherized')->name('unautherized');
 Route::get('/notfound','FailController@not_found')->name('not_found');
-Route::get('/adduser','')
+
+
+Route::get('/profile','ProfileController@getProfile')->route('profile');
