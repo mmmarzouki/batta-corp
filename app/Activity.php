@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends BaseModel
+class Activity extends BaseModel
 {
-    public $table = 'users';
+    public $table = 'activities';
 }

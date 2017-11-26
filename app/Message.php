@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends BaseModel
+class Message extends BaseModel
 {
-    public $table = 'users';
+    public $table = 'messages';
 }
