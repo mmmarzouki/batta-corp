@@ -16,4 +16,9 @@ class FailController extends Controller
 
         return response()->not_found_exception();
     }
+
+    public function access_denied() {
+
+        return response()->access_denied_exception();
+    }    
 }

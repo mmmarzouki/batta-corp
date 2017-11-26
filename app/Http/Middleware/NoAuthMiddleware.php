@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AuthorMiddleware
+class NoAuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,13 @@ class AuthorMiddleware
     public function handle($request, Closure $next)
     {
 
-        if( ! \Auth::check() ) {
+        $access_token = $request->header('Authorization');
 
-            return redirect('/');
+        if( $access_token ) {
+
+            return redirect()->route('access_denied');
         }
 
-        return $next($request); 
+        return $next($request);
     }
 }
