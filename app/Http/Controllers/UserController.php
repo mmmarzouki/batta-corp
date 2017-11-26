@@ -46,7 +46,9 @@ class UserController extends Controller
 
         $user->saveOrFail();
 
-        return response()->created();
+        Auth::login($user);
+
+        return redirect("/");
     }
 
     public function update(Request $request) {
@@ -89,7 +91,7 @@ class UserController extends Controller
 
         $user->saveOrFail();
 
-        return response()->updated();
+        return redirect()->route('profile');
     }
 
     public function read(Request $request) {
@@ -110,6 +112,6 @@ class UserController extends Controller
 
         $user_data = $user->getAttributes();
 
-        return response()->api($data = $user_data);
+        return redirect()->route('profile');
     }
 }

@@ -31,7 +31,7 @@ class PeerController extends Controller
         }
         $peer->saveOrFail();
 
-        return response()->created();
+        return redirect()->route("peer");
     }
     public function read(Request $request){
         $id=$request->get('id');
@@ -40,14 +40,14 @@ class PeerController extends Controller
         }
 
         $peer= Peer::find($id);
-        return response()->api($data=$peer->getAttributes());
+        return redirect()->route("peer");
     }
     public function readAll(Request $request){
         $array=[];
         foreach(Peer::all() as $peer){
             array_push($array,$peer->getAttributes());
         }
-        return(response()->api($data=$array));
+        return(redirect("/"));
     }
     public function update(Request $request){
         $validator=\Validator::make($request->all(),[
@@ -74,6 +74,6 @@ class PeerController extends Controller
         }
         $peer->saveOrFail();
 
-        return response()->updated();
+        return redirect()->route("peer");
     }
 }
