@@ -33,3 +33,4 @@ Route::post('/readPeer','PeerController@read')->name('read_peer');
 Route::post('/readAllPeer','PeerController@readAll')->name('read_all_peer');
 Route::post('/updatePeer','PeerController@update')->name('update_peer');
 
+Route::get('/profile','ProfileController@getProfile')->route('profile');

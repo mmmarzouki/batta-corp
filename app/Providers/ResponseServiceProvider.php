@@ -18,7 +18,7 @@ class ResponseServiceProvider extends ServiceProvider
             $resp = \Response::make();
             $content = new JsonResponseContent($_code = $code, $_message = $message, $_data = $data );
             $resp->setContent($content);
-            //$resp->setStatusCode($code);
+            $resp->setStatusCode($code,$message);
             return $resp;            
         });
         
