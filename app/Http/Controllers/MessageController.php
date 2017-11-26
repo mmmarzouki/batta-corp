@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Peer;
 use App\Message;
 use Illuminate\Http\Request;
 
@@ -53,9 +54,9 @@ class MessageController extends Controller
             return response()->bad_request_exception();
         }
         $array=[];
-        $ArrayMsgs= User::find($id)->message();
+        $ArrayMsgs= User::find($id)->message;
         foreach ($ArrayMsgs as $msg){
-            array_push($msg->getAttributes());
+            array_push($array,$msg->getAttributes());
         }
         return response()->api($data=$array);
     }
@@ -65,9 +66,9 @@ class MessageController extends Controller
             return response()->bad_request_exception();
         }
         $array=[];
-        $ArrayMsgs= Peer::find($id)->message();
+        $ArrayMsgs= Peer::find($id)->message;
         foreach ($ArrayMsgs as $msg){
-            array_push($msg->getAttributes());
+            array_push($array,$msg->getAttributes());
         }
         return response()->api($data=$array);
     }

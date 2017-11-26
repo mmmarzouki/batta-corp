@@ -5,32 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use Mockery\Exception;
 
 class UserController extends Controller
 {
     public function create(Request $request) {
 
-        $request_parsed = $request->json()->all();
         
-        $validator = \Validator::make($request,[
+        $validator = \Validator::make($request->all(),[
             'name' => 'required|alpha',
             'lastname' => 'required|alpha',
             'email' => 'required|email',
             'password' => 'required|min:10|confirmed',
-            'age' => 'required|digits_between:13,200',
+            'age' => 'required|numeric|between:13,200',
             'height' => 'required|numeric',
-            'weight' => 'required|numeric'
+            'weight' => 'required|numeric',
+            'admin' =>'required'
         ]);
 
-        if( $validatior->fails() ) {
+        if( $validator->fails() ) {
+            $error =$validator->errors()->first();
+            var_dump($error);
             return response()->bad_request_exception();
         }
 
         $user = new User();
         
-        foreach( $request_parsed as $key => $value ) {
+        foreach( $request->all() as $key => $value ) {
 
-            if( in_array($key,$user->getColumn()) && ! is_null($value) ) {
+            if( in_array($key,$user->getColumns()) && ! is_null($value) ) {
 
                 $user->$key = $value;
 
@@ -48,38 +51,32 @@ class UserController extends Controller
 
     public function update(Request $request) {
 
-        $request_parsed = $request->json()->all();
 
-        $validator = \Validator::make($request_parsed,[
+        $validator = \Validator::make($request->all(),[
             'name' => 'alpha',
             'lastname' => 'alpha',
             'password' => 'min:10|confirmed',
-            'age' => 'digits_between:13,200',
+            'age' => 'numeric|between:13,200',
             'height' => 'numeric',
             'weight' => 'numeric'
         ]);
-
-        $access_token = $request->header('Authorization');
-
-        if( ! $access_token ) {
-            return response()->unautherized();
-        }
-
-        $id = $request_parsed['id'];
+        
+        $id = $request->get('id');
 
         $user = User::find($id);
 
         if( is_null($user) ) {
 
-            return response()->internal_server_exception();
+            return response()->internal_server_error();
         }
 
         if( $validator->fails() ) {
-
+            $error =$validator->errors()->first();
+            var_dump($error);
             return response()->bad_request_exception();
         }
 
-        foreach( $request_parsed as $key => $value ) {
+        foreach( $request->all() as $key => $value ) {
 
             if( $value && in_array($key,$user->getColumns())) {
 
@@ -92,7 +89,7 @@ class UserController extends Controller
 
         $user->saveOrFail();
 
-        return response()->update();
+        return response()->updated();
     }
 
     public function read(Request $request) {
@@ -102,13 +99,13 @@ class UserController extends Controller
         $id = $request->get('id');
 
         if( is_null($id) ) {
-            return $response->internal_server_error();
+            return response()->internal_server_error();
         }
 
         $user = User::find($id);
 
         if( is_null($user) ) {
-            return $response->internal_server_error();
+            return response()->internal_server_error();
         }
 
         $user_data = $user->getAttributes();

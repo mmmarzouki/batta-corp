@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Peer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
 
 class PeerController extends Controller
 {
     public function create(Request $request) {
 
-        $validator=\Validator::make($request,[
+        $validator=\Validator::make($request->all(),[
             'name'=> 'required|alpha',
             'goal'=>'required|alpha_num',
             'deadline'=>'required|alpha_num',
@@ -24,7 +25,7 @@ class PeerController extends Controller
         $peer = new Peer();
 
         foreach ($request->all() as $key => $value){
-            if(inArray($key,$peer->getColumns())&& !is_null($value)&& $key !='id'){
+            if(in_array($key,$peer->getColumns())&& !is_null($value)&& $key !='id'){
                 $peer->$key=$value;
             }
         }
@@ -32,7 +33,6 @@ class PeerController extends Controller
 
         return response()->created();
     }
-
     public function read(Request $request){
         $id=$request->get('id');
         if(is_null($id)){
@@ -50,7 +50,7 @@ class PeerController extends Controller
         return(response()->api($data=$array));
     }
     public function update(Request $request){
-        $validator=\Validator::make($request,[
+        $validator=\Validator::make($request->all(),[
             'name'=> 'required|alpha',
             'goal'=>'required|alpha_num',
             'deadline'=>'required|alpha_num',
@@ -68,7 +68,7 @@ class PeerController extends Controller
         $peer= Peer::find($id);
 
         foreach ($request->all() as $key => $value){
-            if(inArray($key,$peer->getColumns())&& !is_null($value)){
+            if(in_array($key,$peer->getColumns())&& !is_null($value)){
                 $peer->$key=$value;
             }
         }
