@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('month',255);
             $table->string('name',255);
+            $table->string('level',255);
         });
     }
 

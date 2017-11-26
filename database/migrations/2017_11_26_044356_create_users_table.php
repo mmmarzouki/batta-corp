@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('lastname',255);
             $table->string('email',255);
             $table->string('password',255);
+            $table->boolean('admin');
+            $table->string('access_token');
             $table->float('weight');
             $table->float('height');
             $table->integer('age');
