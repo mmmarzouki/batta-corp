@@ -24,7 +24,7 @@ class PeerController extends Controller
         $peer = new Peer();
 
         foreach ($request->all() as $key => $value){
-            if(inArray($key,$peer->getColumns())&& !is_null($value)){
+            if(inArray($key,$peer->getColumns())&& !is_null($value)&& $key !='id'){
                 $peer->$key=$value;
             }
         }
@@ -33,21 +33,21 @@ class PeerController extends Controller
         return response()->created();
     }
 
-    public function delete(Request $request){
-
-
-    }
     public function read(Request $request){
         $id=$request->get('id');
         if(is_null($id)){
             return response()->bad_request_exception();
         }
-        $peer= Peer::find($id);
 
-        return $peer;
+        $peer= Peer::find($id);
+        return response()->api($data=$peer->getAttributes());
     }
     public function readAll(Request $request){
-        return(Peer::all());
+        $array=[];
+        foreach(Peer::all() as $peer){
+            array_push($array,$peer->getAttributes());
+        }
+        return(response()->api($data=$array));
     }
     public function update(Request $request){
         $validator=\Validator::make($request,[
@@ -74,6 +74,6 @@ class PeerController extends Controller
         }
         $peer->saveOrFail();
 
-        return response()->created();
+        return response()->updated();
     }
 }

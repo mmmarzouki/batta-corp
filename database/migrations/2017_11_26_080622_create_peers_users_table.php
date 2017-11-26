@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAchievmentsTable extends Migration
+class CreatePeersUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateAchievmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('achievments', function (Blueprint $table) {
+        Schema::create('peers_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',255);
-            $table->string('level',255);
-            $table->integer('id_event')->unsigned();
+            $table->integer('id_peer')->unsigned();
+            $table->integer('id_user')->unsigned();
         });
     }
 
@@ -28,6 +27,6 @@ class CreateAchievmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('achievments');
+        Schema::dropIfExists('peers_users');
     }
 }
