@@ -13,7 +13,7 @@ class CreateAchievmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('achievments', function (Blueprint $table) {
+        Schema::create('achievements', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',255);
             $table->string('level',255);
