@@ -28,7 +28,6 @@ class MessageController extends Controller
 
         return response()->created();
     }
-
     public function delete(Request $request){
         $id=$request->get('id');
         if(is_null($id)){
@@ -40,6 +39,36 @@ class MessageController extends Controller
 
         return response()->deleted();
     }
-
-    public
+    public function read(Request $request){
+        $id=$request->get('id');
+        if(is_null($id)){
+            return response()->bad_request_exception();
+        }
+        $msg= Message::find($id);
+        return response->api($data=$msg->getAttributes(()));
+    }
+    public function readByUser(Request $request){
+        $id=$request->get('id');
+        if(is_null($id)){
+            return response()->bad_request_exception();
+        }
+        $array=[];
+        $ArrayMsgs= User::find($id)->message();
+        foreach ($ArrayMsgs as $msg){
+            array_push($msg->getAttributes());
+        }
+        return response->api($data=$array);
+    }
+    public function readByPeer(Request $request){
+        $id=$request->get('id');
+        if(is_null($id)){
+            return response()->bad_request_exception();
+        }
+        $array=[];
+        $ArrayMsgs= Peer::find($id)->message();
+        foreach ($ArrayMsgs as $msg){
+            array_push($msg->getAttributes());
+        }
+        return response->api($data=$array);
+    }
 }
