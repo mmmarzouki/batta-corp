@@ -40,15 +40,12 @@ Route::post('/readPeer','PeerController@read')->name('read_peer');
 Route::post('/readAllPeer','PeerController@readAll')->name('read_all_peer');
 Route::post('/updatePeer','PeerController@update')->name('update_peer');
 
-<<<<<<< HEAD
 Route::post('/addUser','UserController@create')->name('add_user');
 Route::post('/updateUser','UserController@update')->name('update_user');
 Route::post('/readUser','UserController@read')->name('read_user');
 
 Route::get('/profile','ProfileController@getProfile')->name('profile');
-=======
 Route::get('/error',function() {
 
     return view('error');
 });
->>>>>>> 4ab89d55ec9230b58928eb75aeb3f540964687f9
