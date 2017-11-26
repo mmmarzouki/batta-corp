@@ -15,7 +15,7 @@ class UserController extends Controller
         $validator = \Validator::make($request,[
             'name' => 'required|alpha',
             'lastname' => 'required|alpha',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:10|confirmed',
             'age' => 'required|digits_between:13,200',
             'height' => 'required|numeric',

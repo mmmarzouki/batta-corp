@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Achievment extends BaseModel
+class Achievement extends BaseModel
 {
-    public $table = 'achievments';
+    public $table = 'achievements';
 
     public function event(){
         return $this->belongsTo('App\Event','id','id_event');

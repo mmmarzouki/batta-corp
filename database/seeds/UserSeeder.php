@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
                 'name' => str_random(10),
                 'lastname' => str_random(10),
                 'email' => str_random(10) . '@gmail.com',
-                'password' => bcrypt('secret'),
+                'password' => password_hash('0123456789',CRYPT_SHA256),
                 'height' => $i/10+1.70,
                 'weight' => $i+80.5,
                 'age' => $i+20,
