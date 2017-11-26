@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->float('weight');
             $table->float('height');
             $table->integer('age');
+            $table->timestamps();
         });
     }
 

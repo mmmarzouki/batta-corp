@@ -18,6 +18,7 @@ class CreateEventsUsersTable extends Migration
             $table->integer('id_user')->unsigned();
             $table->integer('id_event')->unsigned();
             $table->boolean('succeed');
+            $table->timestamps();
         });
     }
 

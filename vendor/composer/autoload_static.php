@@ -319,6 +319,7 @@ class ComposerStaticInitd2271885f0a2f349a38df8019ae46dca
         'App\\Http\\Controllers\\FailController' => __DIR__ . '/../..' . '/app/Http/Controllers/FailController.php',
         'App\\Http\\Controllers\\MessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/MessageController.php',
         'App\\Http\\Controllers\\PeerController' => __DIR__ . '/../..' . '/app/Http/Controllers/PeerController.php',
+        'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\AuthorMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AuthorMiddleware.php',

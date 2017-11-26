@@ -24,6 +24,7 @@ return array(
     'App\\Http\\Controllers\\FailController' => $baseDir . '/app/Http/Controllers/FailController.php',
     'App\\Http\\Controllers\\MessageController' => $baseDir . '/app/Http/Controllers/MessageController.php',
     'App\\Http\\Controllers\\PeerController' => $baseDir . '/app/Http/Controllers/PeerController.php',
+    'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\AuthorMiddleware' => $baseDir . '/app/Http/Middleware/AuthorMiddleware.php',

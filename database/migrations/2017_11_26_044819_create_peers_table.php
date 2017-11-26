@@ -21,6 +21,7 @@ class CreatePeersTable extends Migration
             $table->string('level',255);
             $table->string('type',255);
             $table->string('icon',255);
+            $table->timestamps();
         });
     }
 

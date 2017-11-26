@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Message;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
     public function create(Request $request){
-        $validator=\Validator::make($request,[
+        $validator=\Validator::make($request->all(),[
             'type'=> 'required|alpha',
-            'content'=>'required',
+            'content'=>'required'
         ]);
         if($validator->fails()){
             return response()->bad_request_exception();
@@ -19,7 +19,7 @@ class MessageController extends Controller
         $message= new Message();
 
         foreach ($request->all() as $key => $value){
-            if(inArray($key,$message->getColumns())&& !is_null($value)&& $key !='id'){
+            if(in_array($key,$message->getColumns())&& !is_null($value)&& $key !='id'){
                 $message->$key=$value;
             }
         }
@@ -45,7 +45,7 @@ class MessageController extends Controller
             return response()->bad_request_exception();
         }
         $msg= Message::find($id);
-        return response->api($data=$msg->getAttributes(()));
+        return response()->api($data=$msg->getAttributes());
     }
     public function readByUser(Request $request){
         $id=$request->get('id');
@@ -57,7 +57,7 @@ class MessageController extends Controller
         foreach ($ArrayMsgs as $msg){
             array_push($msg->getAttributes());
         }
-        return response->api($data=$array);
+        return response()->api($data=$array);
     }
     public function readByPeer(Request $request){
         $id=$request->get('id');
@@ -69,6 +69,6 @@ class MessageController extends Controller
         foreach ($ArrayMsgs as $msg){
             array_push($msg->getAttributes());
         }
-        return response->api($data=$array);
+        return response()->api($data=$array);
     }
 }

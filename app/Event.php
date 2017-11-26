@@ -16,5 +16,4 @@ class Event extends BaseModel
         return $this->hasMany('App\Achievment','id_event');
     }
 
-    }
 }
