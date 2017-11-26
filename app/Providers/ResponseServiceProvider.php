@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Custom\Response\JsonResponseContent;
 
 class ResponseServiceProvider extends ServiceProvider
 {
@@ -85,6 +86,5 @@ class ResponseServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 }

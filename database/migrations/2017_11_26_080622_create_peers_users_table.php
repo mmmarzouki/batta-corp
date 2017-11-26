@@ -17,6 +17,7 @@ class CreatePeersUsersTable extends Migration
             $table->increments('id');
             $table->integer('id_peer')->unsigned();
             $table->integer('id_user')->unsigned();
+            $table->timestamps();
         });
     }
 

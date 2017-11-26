@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->string('content',255);
             $table->integer('id_user')->unsigned();
             $table->integer('id_peer')->unsigned();
+            $table->timestamps();
         });
     }
 

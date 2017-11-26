@@ -18,6 +18,7 @@ class CreateEventsTable extends Migration
             $table->string('month',255);
             $table->string('name',255);
             $table->string('level',255);
+            $table->timestamps();
         });
     }
 

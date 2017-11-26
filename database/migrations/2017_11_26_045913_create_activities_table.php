@@ -19,6 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->string('duration',255);
             $table->string('description',255);
             $table->integer('id_peer')->unsigned();
+            $table->timestamps();
         });
     }
 

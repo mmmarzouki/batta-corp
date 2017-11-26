@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAchievmentsTable extends Migration
+class CreateAchievementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,6 +18,7 @@ class CreateAchievmentsTable extends Migration
             $table->string('name',255);
             $table->string('level',255);
             $table->integer('id_event')->unsigned();
+            $table->timestamps();
         });
     }
 
